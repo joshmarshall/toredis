@@ -30,6 +30,7 @@ class SubHandler(RequestHandler):
 
     def get(self):
         self.client = Client()
+        self.client.connect()
         self.client.subscribe("foo", callback=self.on_message)
 
     def on_message(self, message):
