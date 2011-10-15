@@ -93,3 +93,10 @@ class TestClient(AsyncTestCase):
         self.assertTrue("pub" in result)
         self.assertEqual(result["pub"], 0) # no subscribers yet
 
+    def test_disconnect(self):
+        client = Client(ioloop=self.io_loop)
+        client.connect()
+        client.disconnect()
+        with self.assertRaises(IOError):
+            client._stream.read_bytes(1024, lambda x: x)
+

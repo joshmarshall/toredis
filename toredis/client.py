@@ -22,6 +22,10 @@ class Client(object):
         self._stream.set_close_callback(self._close)
         self._stream.connect((host, port), callback=callback)
 
+    def disconnect(self):
+        """ Close connection to Redis. """
+        self._stream.close()
+
     def _close(self):
         """ Detect a close -- overwrite in sub classes if required """
         pass
